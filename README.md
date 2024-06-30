@@ -3,6 +3,7 @@
 This project demonstrates the use of LangChain to create an AI agent that assists in writing essays. The agent uses various prompts to plan, generate, and critique essays, leveraging the OpenAI and Tavily APIs for language generation and search functionalities, respectively.
 
 ## Project Structure
+```plaintext
 LangPlayGround/
 ├── .env
 ├── .gitignore
