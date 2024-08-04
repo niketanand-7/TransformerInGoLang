@@ -14,7 +14,6 @@ from langchain_core.pydantic_v1 import BaseModel
 
 from templates import PLAN_PROMPT, WRITER_PROMPT, REFLECTION_PROMPT, RESEARCH_CRITIQUE_PROMPT, RESEARCH_PLAN_PROMPT
 
-import openai  # Ensure openai is imported
 from openai import RateLimitError  # Import RateLimitError specifically
 
 # Load the environment variables
