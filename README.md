@@ -1,92 +1,74 @@
-# LangChain Playground
+# Transformer from Scratch in Go
 
-This project demonstrates the use of LangChain to create an AI agent that assists in writing essays. The agent uses various prompts to plan, generate, and critique essays, leveraging the OpenAI and Tavily APIs for language generation and search functionalities, respectively.
+This project demonstrates how to build a Transformer model from scratch using the Go programming language. The focus is on understanding and implementing the core components of the Transformer architecture, typically used in natural language processing (NLP) tasks like text encoding and decoding.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Overview
+
+This project implements the fundamental building blocks of a Transformer model, a key architecture in deep learning, particularly in NLP. While Go is not traditionally used for machine learning or deep learning tasks, this project showcases the flexibility of the language and the power of learning by re-implementing core concepts in a different programming environment.
+
+## Features
+
+- **Text Encoding**: Converts text into a sequence of integers representing unique characters.
+- **Custom Transformer Components**: Implementation of basic components of a Transformer such as self-attention, feedforward layers, and positional encoding.
+- **Tensor Operations**: Use of `Gorgonia` for tensor operations, akin to how tensors are handled in PyTorch.
+- **Basic Data Processing**: Encoding and decoding of text data, and visualization of model outputs.
+
+## Prerequisites
+
+- **Go 1.16+**: The project requires Go, preferably the latest version.
+- **Gorgonia**: A machine learning library for Go, used for tensor operations and building the computational graph.
+- **git**: For cloning the repository.
+
+## Installation
+
+1. **Install Go**: If you don't have Go installed, download and install it from [here](https://golang.org/doc/install).
+   
+2. **Set up the project**:
+    ```bash
+    git clone https://github.com/your-username/transformer-go.git
+    cd transformer-go
+    ```
+
+3. **Install dependencies**:
+    ```bash
+    go get -u gorgonia.org/gorgonia
+    go get -u gorgonia.org/tensor
+    ```
+
+## Usage
+
+1. **Running the Example**:
+    - To run the main program that demonstrates the encoding of text and building of a tensor:
+    ```bash
+    go run main.go
+    ```
+
+2. **Encoding Text**:
+    - The `encode` function converts text into a sequence of integers based on the characters present.
+    
+3. **Tensor Operations**:
+    - The project uses `Gorgonia` for handling tensor operations, similar to PyTorch in Python.
+
+4. **Experiment**:
+    - Modify `main.go` to include more advanced components of the Transformer, such as self-attention and feedforward layers.
+    - Implement different text datasets or tasks like language modeling.
 
 ## Project Structure
+
 ```plaintext
-LangPlayGround/
-├── .env
-├── .gitignore
-├── essayWriter.py
-├── templates.py
-└── README.md
-
-- **.env**: Environment variables required for the project.
-- **.gitignore**: Specifies files and directories to be ignored by Git.
-- **essayWriter.py**: The main script that defines the essay writing agent and its workflow.
-- **templates.py**: Contains prompt templates used by the agent.
-- **README.md**: This README file.
-
-## Setup Instructions
-
-### Prerequisites
-
-- Python 3.8 or higher
-- OpenAI API key
-- Tavily API key
-
-### Installation
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/your-username/LangPlayGround.git
-   cd LangPlayGround
-2.	Create and activate a virtual environment:
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-3.	Install the required packages:
-pip install -r requirements.txt
-4. Create a .env file in the project root directory and add your API keys:
-OPENAI_API_KEY=your_openai_api_key
-TAVILY_API_KEY=your_tavily_api_key
-## Usage
-1.	Ensure you have activated your virtual environment:
-Mac: source .venv/bin/activate
-On Windows: .venv\Scripts\activate
-2.	Run the essayWriter.py script:
-python essayWriter.py
-3.	The script will process the given task and output the results to the console.
-
-Script Overview
-
-essayWriter.py
-
-This script defines the workflow of the essay writing agent using LangChain’s StateGraph. The agent follows these steps:
-
-	1.	Planning: Generates a plan for the essay based on the given task.
-	2.	Research: Uses Tavily to search for relevant content based on the plan.
-	3.	Generation: Creates a draft of the essay using the gathered content.
-	4.	Reflection: Critiques the draft to identify areas for improvement.
-	5.	Research for Critique: Searches for additional content to address the critique points.
-	6.	Revision: Generates a revised draft based on the critique and additional research.
-
-templates.py
-
-Contains the prompt templates used by the agent:
-
-	•	PLAN_PROMPT: Template for generating an essay plan.
-	•	WRITER_PROMPT: Template for generating an essay draft.
-	•	REFLECTION_PROMPT: Template for critiquing the essay draft.
-	•	RESEARCH_CRITIQUE_PROMPT: Template for researching additional content based on critique points.
-	•	RESEARCH_PLAN_PROMPT: Template for initial research based on the essay plan.
-
-Handling Rate Limits
-
-The script includes a function call_openai_api_with_backoff to handle OpenAI API rate limits using exponential backoff. If the rate limit is exceeded, the script waits and retries the request.
-
-License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
-Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request on GitHub.
-
-Acknowledgements
-
-	•	OpenAI for their powerful language models.
-	•	Tavily for their search API.
-	•	LangChain for the framework used to build this agent.
-
- Make sure to update the placeholders (like the repository URL, API keys, etc.) with the actual information relevant to your project. This `README.md` file should provide a clear and concise guide for anyone looking to understand and use your LangChain Playground project.
- 
+.
+├── main.go            # Entry point for the project, includes the text encoding and tensor example
+├── go.mod             # Go module file
+├── go.sum             # Go dependencies
+└── README.md          # This README file
