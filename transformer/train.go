@@ -6,6 +6,7 @@ import (
 	"os"
 	"sort"
 	"strings"
+
 	// "gorgonia.org/gorgonia"
 	"gorgonia.org/tensor"
 )
@@ -63,7 +64,6 @@ func main() {
 	// substring := text[:1000]
 	// fmt.Println("Substring: ", substring)
 
-
 	// sets do not exist in golang, so we will use a map for the characters in text and it will behave as a set
 	vocabSet := map[string]struct{}{}
 
@@ -86,17 +86,32 @@ func main() {
 	sortedVocabStr := strings.Join(vocabSlice, "")
 	fmt.Println("Sorted Vocab: ", sortedVocabStr)
 
-
-
 	// 	TOKENIZATION!!!
 	// currently using character level tokenizatino, will change to use tiktoken or google subword tokenizer
 	// create a mapping from character to index and index to character
 	stoi := mapCharToIdx(sortedVocabStr)
 	// itos := mapIdxToChar(sortedVocabStr)
-	
+
 	encodedText := encodeString(text, stoi)
 	encodedTensor := tensor.New(tensor.WithShape(len(encodedText)), tensor.Of(tensor.Int), tensor.WithBacking(encodedText))
 
 	fmt.Println("Tensor shape: ", encodedTensor.Shape())
 	fmt.Println("Tensor data type: ", encodedTensor.Dtype())
+
+	// Inspect the first 1000 characters (or fewer if the text is shorter)
+	// if len(encodedText) > 1000 {
+	// 	fmt.Println("First 1000 encoded characters:", encodedText[:1000])
+	// } else {
+	// 	fmt.Println("First 1000 encoded characters:", encodedText)
+	// }
+
+	// now split up the data into train and validation sets
+	// first 90% will be train, rest val
+	trainSize := int(0.9 * float64(len(encodedText)))
+	train_data := encodedText[:trainSize]
+	val_data := encodedText[trainSize:]
+
+	fmt.Println("Train data size: ", len(train_data))
+	fmt.Println("Val data size: ", len(val_data))
+
 }
