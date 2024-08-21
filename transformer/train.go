@@ -87,6 +87,7 @@ func main() {
 
 
 	// 	TOKENIZATION!!!
+	// currently using character level tokenizatino, will change to use tiktoken or google subword tokenizer
 	// create a mapping from character to index and index to character
 	stoi := mapCharToIdx(sortedVocabStr)
 	itos := mapIdxToChar(sortedVocabStr)
