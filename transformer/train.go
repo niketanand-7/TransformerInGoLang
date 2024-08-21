@@ -6,7 +6,7 @@ import (
 	"os"
 	"sort"
 	"strings"
-	"gorgonia.org/gorgonia"
+	// "gorgonia.org/gorgonia"
 	"gorgonia.org/tensor"
 )
 
@@ -92,7 +92,7 @@ func main() {
 	// currently using character level tokenizatino, will change to use tiktoken or google subword tokenizer
 	// create a mapping from character to index and index to character
 	stoi := mapCharToIdx(sortedVocabStr)
-	itos := mapIdxToChar(sortedVocabStr)
+	// itos := mapIdxToChar(sortedVocabStr)
 	
 	encodedText := encodeString(text, stoi)
 	encodedTensor := tensor.New(tensor.WithShape(len(encodedText)), tensor.Of(tensor.Int), tensor.WithBacking(encodedText))
