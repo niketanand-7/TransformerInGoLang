@@ -6,6 +6,8 @@ import (
 	"os"
 	"sort"
 	"strings"
+	"gorgonia.org/gorgonia"
+	"gorgonia.org/tensor"
 )
 
 func readFile(fileName string) (string, error) {
@@ -92,11 +94,9 @@ func main() {
 	stoi := mapCharToIdx(sortedVocabStr)
 	itos := mapIdxToChar(sortedVocabStr)
 	
-	// testing encoding and decoding of text
-	encodedText := encodeString("hii there", stoi)
-	decodedText := decodeString(encodedText, itos)
+	encodedText := encodeString(text, stoi)
+	encodedTensor := tensor.New(tensor.WithShape(len(encodedText)), tensor.Of(tensor.Int), tensor.WithBacking(encodedText))
 
-	fmt.Println("Encoded Text: ", encodedText)
-	fmt.Println("Decoded Text: ", decodedText)
-
+	fmt.Println("Tensor shape: ", encodedTensor.Shape())
+	fmt.Println("Tensor data type: ", encodedTensor.Dtype())
 }
