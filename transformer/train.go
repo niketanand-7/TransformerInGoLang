@@ -154,4 +154,7 @@ func main() {
 			fmt.Printf("When input is %v the target: %d\n", context, target)
 		}
 	}
+
+	// most basic neural network that we will implement: BigramLanguageModel
+
 }
