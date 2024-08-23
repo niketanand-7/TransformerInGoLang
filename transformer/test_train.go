@@ -93,13 +93,7 @@ func NewBigramLanguageModel(vocabSize int, g *gorgonia.ExprGraph) *BigramLanguag
 	}
 }
 
-// Forward pass for the model
 func (m *BigramLanguageModel) Forward(idx, targets *gorgonia.Node) (*gorgonia.Node, *gorgonia.Node, error) {
-	// Embedding lookup
-	logits, err := gorgonia.Mul(m.tokenEmbeddingTable, idx)
-	if err != nil {
-		return nil, nil, err
-	}
 
 	var loss *gorgonia.Node
 	if targets != nil {
@@ -109,7 +103,7 @@ func (m *BigramLanguageModel) Forward(idx, targets *gorgonia.Node) (*gorgonia.No
 		logitsReshaped := gorgonia.Must(gorgonia.Reshape(logits, tensor.Shape{B * T, C}))
 		targetsReshaped := gorgonia.Must(gorgonia.Reshape(targets, tensor.Shape{B * T}))
 
-		// Compute the cross-entropy loss (assuming you implement this)
+		// Compute the cross-entropy loss
 		loss, err = CrossEntropy(logitsReshaped, targetsReshaped)
 		if err != nil {
 			return nil, nil, err
@@ -228,7 +222,7 @@ func main() {
 	}
 
 	// Generate new text
-	startIdx := gorgonia.NewMatrix(g, tensor.Int, gorgonia.WithShape(1, 1), gorgonia.WithInit(gorgonia.Zeroes()))
+	startIdx := gorgonia.NewMatrix(g, tensor.Float32, gorgonia.WithShape(1, 1), gorgonia.WithInit(gorgonia.Zeroes()))
 	generated, err := model.Generate(startIdx, 100)
 	if err != nil {
 		fmt.Println("Error generating text:", err)
